@@ -25,18 +25,28 @@ function deletee(){
 }
 
 
+let v="";
+
+//'=' event listener
+document.querySelector(".equals").addEventListener("click",()=>{
+  bufferDisplay.innerText+=v;
+  bufferDisplay.innerText+='=';
+  let res=add(a,b);
+  mainDisplay.innerText=res;
+
+
+});
 
 let mainDisplay=document.querySelector(".display .main");
 let bufferDisplay=document.querySelector(".display .buffer");
 
-
 //pressed number on main display - event listeners 
   document.querySelector(".buttons .sec1 .bottom").addEventListener("click",(e)=>{
-
-    let pressed;
     if(e.target.classList.contains("num")) {
-      pressed = e.target.innerText;
-      mainDisplay.innerText+=pressed;
+      v += e.target.innerText;
+      mainDisplay.innerText+=v;
+      if(a===undefined)a=parseInt(v);
+      else b=parseInt(v);
     }});
 
   //clear and delete event listeners 
@@ -47,7 +57,7 @@ let bufferDisplay=document.querySelector(".display .buffer");
 
   // function event listener
   document.querySelector(".buttons .sec2").addEventListener("click",(e)=>{
-
+    v="";
     if(e.target.tagName==="BUTTON") {
       if(e.target.classList.contains("add"))  {
    
