@@ -1,7 +1,9 @@
-/* .all{
-  display: flex;
+button:hover{
+  background-color: rgb(146, 146, 158);
+  cursor: pointer;
+  
 
-} */
+}
 
 
 .title{

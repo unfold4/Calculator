@@ -16,6 +16,9 @@ function power(a,b){
 
 
 function clear(){
+  v="";
+  a=undefined;
+  b=undefined;
   mainDisplay.innerText="";
   bufferDisplay.innerText="";
 }
@@ -39,21 +42,29 @@ let bufferDisplay=document.querySelector(".display .buffer");
       mainDisplay.innerText+=pressed;
     }});
 
+
+
   //clear and delete event listeners 
   document.querySelector(".buttons .sec1 .top").addEventListener("click",(e)=>{
     if(e.target.classList.contains("clear")) clear();
     if(e.target.classList.contains("delete")) deletee();
   })
 
+
+
   // function event listener
   document.querySelector(".buttons .sec2").addEventListener("click",(e)=>{
 
+  let allPossibleOperators = "*/+-^";
+  //if mainDisplay empty and last letter of buffer isnt an operator then press and print an operator
+   if(mainDisplay.innerText!==""  && !allPossibleOperators.includes(bufferDisplay.innerText[bufferDisplay.innerText.length-1]))
+    
+    {
+
     if(e.target.tagName==="BUTTON") {
       if(e.target.classList.contains("add"))  {
-   
-
         bufferDisplay.innerText=mainDisplay.innerText;
-        if(mainDisplay.innerHTML!=="")bufferDisplay.innerText+="+";
+        bufferDisplay.innerText+="+";
         op='+'
       }
       if(e.target.classList.contains("subtract"))  {
@@ -72,6 +83,9 @@ let bufferDisplay=document.querySelector(".display .buffer");
         a = mainDisplay.innerText;
 
     };
+
+  }
+
   })
   
 
