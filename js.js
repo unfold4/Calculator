@@ -1,4 +1,4 @@
-function add(a,b){
+function sum(a,b){
   return a+b;
 }
 function subtract(a,b){
@@ -15,6 +15,15 @@ function power(a,b){
 }
 
 
+  function operate(a,b,op){
+    if(op==='+') return sum(a,b);
+    if(op==='-') return subtract(a,b);
+    if(op==='*') return multiply(a,b);
+    if(op==='/') return divide(a,b);
+    if(op==='^') return power(a,b);
+  }
+
+
 function clear(){
   v="";
   a=undefined;
@@ -27,19 +36,30 @@ function deletee(){
 
 }
 
-
+let v="";
 
 let mainDisplay=document.querySelector(".display .main");
 let bufferDisplay=document.querySelector(".display .buffer");
 
 
+// press '=' event listener 
+document.querySelector(".equals").addEventListener("click",()=>{
+  b=parseInt(v);
+  bufferDisplay.innerText+=b+'=';
+  mainDisplay.innerHTML=operate(a,b,op)
+
+
+})
+
+
 //pressed number on main display - event listeners 
   document.querySelector(".buttons .sec1 .bottom").addEventListener("click",(e)=>{
 
-    let pressed;
     if(e.target.classList.contains("num")) {
-      pressed = e.target.innerText;
-      mainDisplay.innerText+=pressed;
+      v+=e.target.innerText;
+      mainDisplay.innerText=v;
+
+
     }});
 
 
@@ -55,51 +75,29 @@ let bufferDisplay=document.querySelector(".display .buffer");
   // function event listener
   document.querySelector(".buttons .sec2").addEventListener("click",(e)=>{
 
-  let allPossibleOperators = "*/+-^";
-  //if mainDisplay empty and last letter of buffer isnt an operator then press and print an operator
-   if(mainDisplay.innerText!==""  && !allPossibleOperators.includes(bufferDisplay.innerText[bufferDisplay.innerText.length-1]))
+   if(mainDisplay.innerText!=="")
     
     {
-
-    if(e.target.tagName==="BUTTON") {
-      if(e.target.classList.contains("add"))  {
-        bufferDisplay.innerText=mainDisplay.innerText;
-        bufferDisplay.innerText+="+";
-        op='+'
-      }
-      if(e.target.classList.contains("subtract"))  {
-        if(mainDisplay.innerHTML!=="")mainDisplay.innerText+="-"
-        op='-';}
-      if(e.target.classList.contains("multiply"))  {
-        if(mainDisplay.innerHTML!=="")mainDisplay.innerText+="*"
-        op='*';}
-      if(e.target.classList.contains("divide") ) {
-        if(mainDisplay.innerHTML!=="")mainDisplay.innerText+="/"
-        op='/';}
-      if(e.target.classList.contains("power")) {
-        if(mainDisplay.innerHTML!=="")mainDisplay.innerText+="^"
-        op='^';}
-
-        a = mainDisplay.innerText;
-
-    };
-
+    if(a===undefined){
+      op=e.target.innerText;
+      bufferDisplay.innerText=v+op;
+      a=parseInt(v);
+      v=""
+    }
+    else{
+      b=parseInt(v);
+      a=operate(a,b,op);
+      op=e.target.innerText;
+      bufferDisplay.innerText=`${a}${op}`;
+      mainDisplay.innerText=a;
+      v="";
+    }
   }
-
   })
   
+
 
   let a ;
   let b ;
   let op;
 
-function operate(){
-
-
-
-
-
-
-}
-
-operate();
