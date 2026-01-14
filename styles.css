@@ -5,6 +5,9 @@ button:hover{
 
 }
 
+.buffer,.main{
+  text-align: end;
+}
 
 .title{
   display: flex;
